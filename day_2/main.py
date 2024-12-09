@@ -15,29 +15,23 @@ def normalize_file(path = "data.txt"):
         records.append(record)
     return records
 
-def is_record_safe(record: list) -> list[bool]:
+def is_record_safe(record: list) -> bool:
     initial_diff = record[0] - record[1]
     if(initial_diff == 0):
         return False
-    is_increasing = initial_diff < 0
-    prior_level = None
-
-    for level in record:
-        if(prior_level == None):
-            prior_level = level
-            continue
-
-        diff = prior_level - level
-        prior_level = level
+    for i in range(1, len(record)):
+        prior_level = record[i - 1]
+        current_level = record[i]
+        diff = prior_level - current_level
 
         if((abs(diff) > 3) or diff == 0):
             return False
         
-        pattern_maintained = is_increasing == (diff < 0)
-        if(not pattern_maintained):
+        if(not (initial_diff < 0) == (diff < 0)):
             return False
         
     return True
+
 
 
 
