@@ -71,7 +71,9 @@ def find_xmas(string) -> int:
 
 def main():
     with open('data.txt') as f:
-        input = f.readlines()
+        data = f.readlines()
+
+    input = SAMPLE_DATA
 
     lines = input
     verticals = vertical_transpose(input)
