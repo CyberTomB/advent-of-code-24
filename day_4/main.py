@@ -32,13 +32,19 @@ def vertical_transpose(rows):
 def diagonal_transpose(rows):
     matrix = []
     diagonals = []
+    row_length = 0
     for row in rows:
         row_arr = []
         for char in row:
-            row_arr.append(char)
+            if(not char == '\n'):
+                row_arr.append(char)
         matrix.append(row_arr)
+        row_length = len(row_arr)
+    maximum = max(row_length, len(matrix))
+    print(f"The max is {maximum}")
 
-    for i in range(0, 7):
+
+    for i in range(0, (maximum - 3)):
         top_row_diag = ''.join(np.diagonal(matrix, i))
         print(f"First row diagonal from position {i}: {top_row_diag}")
         diagonals.append(top_row_diag)
@@ -73,7 +79,10 @@ def main():
     with open('data.txt') as f:
         data = f.readlines()
 
-    input = SAMPLE_DATA
+    with open('sample.txt') as s:
+        sample = s.readlines()
+
+    input = data
 
     lines = input
     verticals = vertical_transpose(input)
